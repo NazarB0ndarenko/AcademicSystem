@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .note {
+            font-size: 0.85em;
+            color: #777;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleFields() {
+            const role = document.getElementById('role').value;
+            const groupField = document.getElementById('group-field');
+            groupField.style.display = role === 'student' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Create User</h2>
+        <form id="user-form">
+            <label for="role">Role</label>
+            <select id="role" name="role" onchange="toggleFields()" required>
+                <option value="" selected disabled>Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="student">Student</option>
+                <option value="lecture">Lecture</option>
+            </select>
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <div class="note">Leave blank to use the username as the password.</div>
+
+            <div id="group-field" class="hidden">
+                <label for="group">Group</label>
+                <select id="group" name="group">
+                    <option value="" selected disabled>Select Group</option>
+                    <option value="group1">Group 1</option>
+                    <option value="group2">Group 2</option>
+                    <option value="group3">Group 3</option>
+                </select>
+            </div>
+
+            <button type="submit">Create User</button>
+        </form>
+    </div>
+</body>
+</html>
+

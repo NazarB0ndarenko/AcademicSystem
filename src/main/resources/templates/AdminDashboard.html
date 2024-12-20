@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container styling */
+        .admin-dashboard {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Header styling */
+        .admin-dashboard h1 {
+            font-size: 28px;
+            color: #333333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Action list container */
+        .action-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Action list item (buttons or links) */
+        .action-list li {
+            margin-bottom: 15px;
+        }
+
+        .action-list li a {
+            display: block;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .action-list li a:hover {
+            background-color: #0056b3;
+            transform: scale(1.02);
+        }
+
+        /* Footer or helper text (optional) */
+        .admin-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .admin-footer a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .admin-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <ul class="action-list">
+            <li><a href="/admin/groups">Manage Student Groups</a></li>
+            <li><a href="/admin/courses">Manage Courses</a></li>
+            <li><a href="/admin/lecturers">Manage Lecturers</a></li>
+            <li><a href="/admin/students">Manage Students</a></li>
+            <li><a href="/admin/assign-lecturers">Assign Lecturers to Subjects</a></li>
+            <li><a href="/admin/assign-groups">Assign Students and Subjects to Groups</a></li>
+        </ul>
+        <div class="admin-footer">
+            <p><a href="/">Back to Homepage</a></p>
+        </div>
+    </div>
+</body>
+</html>
