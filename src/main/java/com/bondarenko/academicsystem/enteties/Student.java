@@ -2,9 +2,7 @@ package com.bondarenko.academicsystem.enteties;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Collection;
 
@@ -22,7 +20,7 @@ public class Student {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "group_id", nullable = true)
+    @JoinColumn(name = "group_id")
     private Group group;
 
     @OneToMany

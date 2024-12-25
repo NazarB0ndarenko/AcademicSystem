@@ -1,13 +1,10 @@
 package com.bondarenko.academicsystem.controllers.admin;
 
 import com.bondarenko.academicsystem.dto.CreateGroupDto;
-import com.bondarenko.academicsystem.dto.GroupDto;
-import com.bondarenko.academicsystem.enteties.Group;
 import com.bondarenko.academicsystem.services.GroupService;
 import com.bondarenko.academicsystem.services.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

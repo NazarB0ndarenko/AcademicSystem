@@ -1,6 +1,5 @@
 package com.bondarenko.academicsystem.dto;
 
-import com.bondarenko.academicsystem.enteties.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

@@ -3,14 +3,10 @@ package com.bondarenko.academicsystem.enteties;
 import com.bondarenko.academicsystem.dto.CreateGroupDto;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @Entity

@@ -3,16 +3,13 @@ package com.bondarenko.academicsystem.services;
 import com.bondarenko.academicsystem.dto.CreateGroupDto;
 import com.bondarenko.academicsystem.dto.GroupDto;
 import com.bondarenko.academicsystem.enteties.Group;
-import com.bondarenko.academicsystem.enteties.Student;
 import com.bondarenko.academicsystem.repositories.GroupRepository;
 import com.bondarenko.academicsystem.repositories.StudentRepository;
-import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -23,7 +20,6 @@ public class GroupService {
 
     private final GroupRepository groupRepository;
     private final StudentRepository studentRepository;
-    private final EntityManager entityManager;
 
     public List<GroupDto> getAllGroups() {
         log.info("Fetching all groups");
@@ -42,9 +38,7 @@ public class GroupService {
         groupRepository.save(group);
 
         if (createGroupDto.getStudentIds() != null) {
-            createGroupDto.getStudentIds().forEach(studentId -> {
-                studentRepository.addStudentToGroup(studentId, group);
-            });
+            createGroupDto.getStudentIds().forEach(studentId -> studentRepository.addStudentToGroup(studentId, group));
         }
 
         log.info("Successfully saved group with name: {}", group.getName());

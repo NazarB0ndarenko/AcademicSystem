@@ -3,7 +3,6 @@ package com.bondarenko.academicsystem.repositories;
 import com.bondarenko.academicsystem.enteties.Lecture;
 import com.bondarenko.academicsystem.enteties.User;
 import com.bondarenko.academicsystem.models.Role;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

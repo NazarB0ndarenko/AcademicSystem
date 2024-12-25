@@ -3,9 +3,7 @@ package com.bondarenko.academicsystem.enteties;
 import com.bondarenko.academicsystem.dto.user.CreateUserDto;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import com.bondarenko.academicsystem.models.Role;
 

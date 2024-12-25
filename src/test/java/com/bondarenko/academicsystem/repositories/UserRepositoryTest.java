@@ -1,7 +1,6 @@
 package com.bondarenko.academicsystem.repositories;
 
 import com.bondarenko.academicsystem.dto.LoginDto;
-import com.bondarenko.academicsystem.dto.user.CreateUserDto;
 import com.bondarenko.academicsystem.dto.user.UserIdRoleDto;
 import com.bondarenko.academicsystem.enteties.User;
 import com.bondarenko.academicsystem.models.Role;
