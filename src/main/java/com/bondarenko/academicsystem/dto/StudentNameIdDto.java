@@ -9,5 +9,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class StudentNameIdDto {
     long id;
-    String username;
+    String fullName;
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-        /* General styles */
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f3f4f6;
@@ -17,7 +17,6 @@
             height: 100vh;
         }
 
-        /* Container styling */
         .admin-dashboard {
             background-color: #ffffff;
             border-radius: 8px;
@@ -27,7 +26,6 @@
             max-width: 600px;
         }
 
-        /* Header styling */
         .admin-dashboard h1 {
             font-size: 28px;
             color: #333333;
@@ -35,14 +33,12 @@
             margin-bottom: 20px;
         }
 
-        /* Action list container */
         .action-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        /* Action list item (buttons or links) */
         .action-list li {
             margin-bottom: 15px;
         }
@@ -65,7 +61,7 @@
             transform: scale(1.02);
         }
 
-        /* Footer or helper text (optional) */
+
         .admin-footer {
             text-align: center;
             margin-top: 20px;
@@ -85,15 +81,16 @@
     <div class="admin-dashboard">
         <h1>Admin Dashboard</h1>
         <ul class="action-list">
-            <li><a href="/admin/groups">Manage Student Groups</a></li>
+            <li><a href="/admin/add-user">Add users</a></li>
+            <li><a href="/admin/delete-user">Delete users</a></li>
+            <li><a href="/admin/add-group">Add Student Groups</a></li>
+            <li><a href="/admin/delete-group">Delete Student Groups</a></li>
             <li><a href="/admin/courses">Manage Courses</a></li>
-            <li><a href="/admin/lecturers">Manage Lecturers</a></li>
-            <li><a href="/admin/students">Manage Students</a></li>
             <li><a href="/admin/assign-lecturers">Assign Lecturers to Subjects</a></li>
             <li><a href="/admin/assign-groups">Assign Students and Subjects to Groups</a></li>
         </ul>
         <div class="admin-footer">
-            <p><a href="/">Back to Homepage</a></p>
+            <p><a href="/logout">Logout</a></p>
         </div>
     </div>
 </body>

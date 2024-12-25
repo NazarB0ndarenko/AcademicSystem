@@ -1,4 +1,4 @@
-package com.bondarenko.academicsystem.config.filters;
+package com.bondarenko.academicsystem.config.util;
 
 import com.bondarenko.academicsystem.services.JwtService;
 import jakarta.servlet.FilterChain;
@@ -21,11 +21,8 @@ import java.io.IOException;
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
     private final JwtService jwtService;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(
@@ -60,6 +57,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        return path.startsWith("/login") || path.equals("/error") || path.startsWith("/error/");
     }
 
     private String extractJwtFromCookies(HttpServletRequest request) {

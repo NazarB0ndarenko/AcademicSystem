@@ -54,9 +54,14 @@
             font-size: 16px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        button:active {
+            transform: translateY(1px);
         }
         .note {
             font-size: 0.85em;
@@ -66,6 +71,28 @@
         }
         .hidden {
             display: none;
+        }
+        .dashboard-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .dashboard-button a {
+            background-color: #007BFF;
+            padding: 12px 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .dashboard-button a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        .dashboard-button a:active {
+            transform: translateY(1px);
         }
     </style>
     <script>
@@ -77,40 +104,44 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <h2>Create User</h2>
-        <form id="user-form">
-            <label for="role">Role</label>
-            <select id="role" name="role" onchange="toggleFields()" required>
-                <option value="" selected disabled>Select Role</option>
-                <option value="admin">Admin</option>
-                <option value="student">Student</option>
-                <option value="lecture">Lecture</option>
+<div class="container">
+    <h2>Create User</h2>
+    <form id="user-form" method="POST" action="/admin/add-user">
+        <label for="role">Role</label>
+        <select id="role" name="role" onchange="toggleFields()" required>
+            <option value="" selected disabled>Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="student">Student</option>
+            <option value="lecture">Lecture</option>
+        </select>
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+        <div class="note">Leave blank to use the username as the password.</div>
+
+        <div id="group-field" class="hidden">
+            <label for="group">Group</label>
+            <select id="group" name="group">
+                <option value="" selected disabled>Select Group</option>
+                <option th:each="group : ${groups}"
+                        th:value="${group.id}"
+                        th:text="${group.name}"></option>
             </select>
+        </div>
 
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
+        <button type="submit">Create User</button>
+    </form>
 
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
-            <div class="note">Leave blank to use the username as the password.</div>
-
-            <div id="group-field" class="hidden">
-                <label for="group">Group</label>
-                <select id="group" name="group">
-                    <option value="" selected disabled>Select Group</option>
-                    <option value="group1">Group 1</option>
-                    <option value="group2">Group 2</option>
-                    <option value="group3">Group 3</option>
-                </select>
-            </div>
-
-            <button type="submit">Create User</button>
-        </form>
+    <div class="dashboard-button">
+        <a href="/admin/dashboard">Go to Dashboard</a>
     </div>
+</div>
 </body>
 </html>
 

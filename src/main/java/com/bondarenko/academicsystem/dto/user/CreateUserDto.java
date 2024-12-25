@@ -1,4 +1,4 @@
-package com.bondarenko.academicsystem.dto;
+package com.bondarenko.academicsystem.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
