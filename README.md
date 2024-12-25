@@ -1,0 +1,1 @@
+This is prototype of academical system, for now working only first 3 function in admin part. The default login root, 1111. On link http://localhost:8080/login. I mostly work with RestControllers, not regular one, so design of html migth not be the best, it was not main goal, but requremnt from university lecture 
