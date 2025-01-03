@@ -1,7 +1,7 @@
 package com.bondarenko.academicsystem.services;
 
-import com.bondarenko.academicsystem.dto.CreateGroupDto;
-import com.bondarenko.academicsystem.dto.GroupDto;
+import com.bondarenko.academicsystem.dto.group.CreateGroupDto;
+import com.bondarenko.academicsystem.dto.group.GroupDto;
 import com.bondarenko.academicsystem.enteties.Group;
 import com.bondarenko.academicsystem.repositories.GroupRepository;
 import com.bondarenko.academicsystem.repositories.StudentRepository;
@@ -48,7 +48,7 @@ public class GroupService {
     public void deleteGroup(long groupId) {
         log.info("Deleting group with id: {}", groupId);
 
-        groupRepository.deleteById(groupId);
+        groupRepository.deactivateGroup(groupId);
 
         log.info("Successfully deleted group with id: {}", groupId);
     }

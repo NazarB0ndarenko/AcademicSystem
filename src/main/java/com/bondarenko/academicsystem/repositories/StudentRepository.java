@@ -37,4 +37,7 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
     @Query("UPDATE Student s SET s.group = :group WHERE s.id = :studentId")
     void addStudentToGroup(@Param("studentId") Long studentId, @Param("group") Group group);
 
+    @Query("SELECT s.id FROM Student s WHERE s.group.id = :groupId")
+    List<Long> findStudentIdsByGroupId(@Param("groupId") Long groupId);
+
 }

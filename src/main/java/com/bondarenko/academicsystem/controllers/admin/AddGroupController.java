@@ -1,6 +1,6 @@
 package com.bondarenko.academicsystem.controllers.admin;
 
-import com.bondarenko.academicsystem.dto.CreateGroupDto;
+import com.bondarenko.academicsystem.dto.group.CreateGroupDto;
 import com.bondarenko.academicsystem.services.GroupService;
 import com.bondarenko.academicsystem.services.StudentService;
 import lombok.AllArgsConstructor;

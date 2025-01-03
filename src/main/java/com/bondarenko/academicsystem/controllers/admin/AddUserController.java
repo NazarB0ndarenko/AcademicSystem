@@ -1,7 +1,7 @@
 package com.bondarenko.academicsystem.controllers.admin;
 
 import com.bondarenko.academicsystem.dto.user.CreateUserDto;
-import com.bondarenko.academicsystem.dto.GroupDto;
+import com.bondarenko.academicsystem.dto.group.GroupDto;
 import com.bondarenko.academicsystem.enteties.User;
 import com.bondarenko.academicsystem.services.CustomUserDetailsService;
 import com.bondarenko.academicsystem.services.GroupService;

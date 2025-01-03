@@ -1,11 +1,14 @@
 package com.bondarenko.academicsystem.services;
 
+import com.bondarenko.academicsystem.dto.LectureNameIdDto;
 import com.bondarenko.academicsystem.enteties.Lecture;
 import com.bondarenko.academicsystem.enteties.User;
 import com.bondarenko.academicsystem.repositories.LectureRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -32,5 +35,11 @@ public class LectureService {
         lectureRepository.deactivateLecture(userId);
 
         log.info("Successfully disabled lecture for user with id: {}", userId);
+    }
+
+    public List<LectureNameIdDto> getAllLectures() {
+        log.info("Getting all the lectures");
+
+        return lectureRepository.getAllLectureNameIdDto();
     }
 }

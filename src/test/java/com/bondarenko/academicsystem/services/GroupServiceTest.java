@@ -2,8 +2,8 @@ package com.bondarenko.academicsystem.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.bondarenko.academicsystem.dto.CreateGroupDto;
-import com.bondarenko.academicsystem.dto.GroupDto;
+import com.bondarenko.academicsystem.dto.group.CreateGroupDto;
+import com.bondarenko.academicsystem.dto.group.GroupDto;
 import com.bondarenko.academicsystem.enteties.Group;
 import com.bondarenko.academicsystem.enteties.Student;
 import com.bondarenko.academicsystem.repositories.GroupRepository;
@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
-import java.util.Optional;
 
 
 import static org.mockito.Mockito.*;
@@ -96,6 +95,8 @@ class GroupServiceTest {
         verify(studentRepository, times(1)).addStudentToGroup(1L, group);
         verify(studentRepository, times(1)).addStudentToGroup(2L, group);
     }
+
+
 }
 
 

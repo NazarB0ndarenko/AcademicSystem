@@ -1,6 +1,6 @@
 package com.bondarenko.academicsystem.controllers.admin;
 
-import com.bondarenko.academicsystem.dto.GroupDto;
+import com.bondarenko.academicsystem.dto.group.GroupDto;
 import com.bondarenko.academicsystem.services.GroupService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,8 +23,8 @@ public class DeleteGroupController {
     }
 
     @PostMapping("/admin/delete-group")
-    public String deleteGroup(@ModelAttribute Long groupId) {
-        groupService.deleteGroup(groupId);
+    public String deleteGroup(@RequestParam String groupId) {
+        groupService.deleteGroup(Long.parseLong(groupId));
         return "redirect:/admin/delete-group";
     }
 }

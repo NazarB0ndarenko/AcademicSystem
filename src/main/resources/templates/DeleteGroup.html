@@ -6,8 +6,8 @@
     <title>Delete Group</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e9ecef;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,49 +17,55 @@
         }
         .container {
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         h2 {
             color: #333;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
         }
         form {
             display: flex;
             flex-direction: column;
         }
         label {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: #555;
             font-weight: bold;
         }
         select, button {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 14px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
             box-sizing: border-box;
         }
         button {
-            background-color: #FF4C4C;
+            background-color: #007BFF;
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 4px;
+            padding: 14px;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
-            margin-top: 10px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         button:hover {
-            background-color: #e03e3e;
+            background-color: #0056b3;
             transform: translateY(-3px);
         }
         button:active {
@@ -72,12 +78,11 @@
         }
         .dashboard-button a {
             background-color: #007BFF;
-            padding: 12px 30px;
+            padding: 14px 40px;
             color: white;
             text-decoration: none;
             font-size: 16px;
-            border-radius: 4px;
-            display: inline-block;
+            border-radius: 8px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .dashboard-button a:hover {
@@ -92,16 +97,14 @@
 <body>
 <div class="container">
     <h2>Delete Group</h2>
-    <form method="POST" th:action="@{/admin/delete-group/{id}}">
+    <form method="POST" action="/admin/delete-group">
         <label for="group">Select Group to Delete</label>
         <select id="group" name="groupId" required>
             <option value="" selected disabled>Select Group</option>
             <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
         </select>
-
         <button type="submit">Delete Group</button>
     </form>
-
     <div class="dashboard-button">
         <a href="/admin/dashboard">Go to Dashboard</a>
     </div>

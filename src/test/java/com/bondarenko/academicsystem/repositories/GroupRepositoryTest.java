@@ -1,11 +1,10 @@
 package com.bondarenko.academicsystem.repositories;
 
-import com.bondarenko.academicsystem.dto.GroupDto;
+import com.bondarenko.academicsystem.dto.group.GroupDto;
 import com.bondarenko.academicsystem.enteties.Group;
 import com.bondarenko.academicsystem.enteties.Student;
 import com.bondarenko.academicsystem.enteties.User;
 import com.bondarenko.academicsystem.models.Role;
-import org.hibernate.validator.internal.constraintvalidators.bv.AssertFalseValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -30,7 +30,7 @@ public class DeleteUserController {
 
     @Transactional
     @PostMapping("/admin/delete-user")
-    public String deleteUser(@RequestParam String username, RedirectAttributes redirectAttributes) {
+    public String deleteUser(@RequestParam String username) {
 
         UserIdRoleDto userIdRoleDto = customUserDetailsService.findUserRole(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));

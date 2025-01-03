@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Assign Enrollments</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -44,20 +44,17 @@
             color: #555;
             font-weight: bold;
         }
-        input, button {
+        select {
             width: 100%;
             padding: 14px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
+            background-color: #f9f9f9;
             box-sizing: border-box;
         }
-        input:focus {
-            border-color: #007BFF;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        option {
+            padding: 5px;
         }
         button {
             background-color: #007BFF;
@@ -76,23 +73,48 @@
         button:active {
             transform: translateY(1px);
         }
-        .login-helper a {
-            color: #007bff;
-            text-decoration: none;
+        .dashboard-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
-        .login-helper a:hover {
-            text-decoration: underline;
+        .dashboard-button a {
+            background-color: #007BFF;
+            padding: 14px 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .dashboard-button a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        .dashboard-button a:active {
+            transform: translateY(1px);
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>Login</h2>
-    <form action="/login" method="post">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
+    <h2>Assign Enrollments</h2>
+    <form method="POST" action="/admin/create-enrolment">
+        <label for="student-group">Select Student Group</label>
+        <select id="student-group" name="studentGroupId">
+            <option value="" selected disabled>Select group</option>
+            <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
+        </select>
+        <label for="course">Select Course</label>
+        <select id="course" name="courseId">
+            <option value="" selected disabled>Select course</option>
+            <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.description}"></option>
+        </select>
+        <button type="submit">Assign</button>
     </form>
+    <div class="dashboard-button">
+        <a href="/admin/dashboard">Go to Dashboard</a>
+    </div>
 </div>
 </body>
 </html>

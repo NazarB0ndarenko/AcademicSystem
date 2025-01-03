@@ -1,4 +1,4 @@
-package com.bondarenko.academicsystem.dto;
+package com.bondarenko.academicsystem.dto.group;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

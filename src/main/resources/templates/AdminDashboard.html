@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e9ecef;
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,28 +18,34 @@
 
         .admin-dashboard {
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .admin-dashboard h1 {
-            font-size: 28px;
+            font-size: 32px;
             color: #333333;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
         }
 
         .action-list {
             list-style: none;
             padding: 0;
             margin: 0;
-        }
-
-        .action-list li {
-            margin-bottom: 15px;
+            display: grid;
+            gap: 20px;
         }
 
         .action-list li a {
@@ -48,28 +53,30 @@
             text-decoration: none;
             background-color: #007bff;
             color: #ffffff;
-            padding: 12px 20px;
-            border-radius: 5px;
+            padding: 15px 25px;
+            border-radius: 8px;
             text-align: center;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
         }
 
         .action-list li a:hover {
             background-color: #0056b3;
-            transform: scale(1.02);
+            transform: scale(1.05);
         }
-
 
         .admin-footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #dddddd;
+            padding-top: 20px;
         }
 
         .admin-footer a {
             text-decoration: none;
             color: #007bff;
+            font-weight: bold;
         }
 
         .admin-footer a:hover {
@@ -78,20 +85,19 @@
     </style>
 </head>
 <body>
-    <div class="admin-dashboard">
-        <h1>Admin Dashboard</h1>
-        <ul class="action-list">
-            <li><a href="/admin/add-user">Add users</a></li>
-            <li><a href="/admin/delete-user">Delete users</a></li>
-            <li><a href="/admin/add-group">Add Student Groups</a></li>
-            <li><a href="/admin/delete-group">Delete Student Groups</a></li>
-            <li><a href="/admin/courses">Manage Courses</a></li>
-            <li><a href="/admin/assign-lecturers">Assign Lecturers to Subjects</a></li>
-            <li><a href="/admin/assign-groups">Assign Students and Subjects to Groups</a></li>
-        </ul>
-        <div class="admin-footer">
-            <p><a href="/logout">Logout</a></p>
-        </div>
+<div class="admin-dashboard">
+    <h1>Admin Dashboard</h1>
+    <ul class="action-list">
+        <li><a href="/admin/add-user">Add Users</a></li>
+        <li><a href="/admin/delete-user">Delete Users</a></li>
+        <li><a href="/admin/add-group">Add Groups</a></li>
+        <li><a href="/admin/delete-group">Delete Groups</a></li>
+        <li><a href="/admin/create-course">Create Courses</a></li>
+        <li><a href="/admin/create-enrolment">Enroll Students to Courses</a></li>
+    </ul>
+    <div class="admin-footer">
+        <p><a href="/logout">Logout</a></p>
     </div>
+</div>
 </body>
 </html>

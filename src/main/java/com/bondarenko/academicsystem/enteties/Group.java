@@ -1,16 +1,14 @@
 package com.bondarenko.academicsystem.enteties;
 
-import com.bondarenko.academicsystem.dto.CreateGroupDto;
+import com.bondarenko.academicsystem.dto.group.CreateGroupDto;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "student_groups")
 public class Group {
     @Id
@@ -23,9 +21,17 @@ public class Group {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Student> students;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
     public Group(CreateGroupDto dto) {
         this.name = dto.getName();
         this.students = new ArrayList<>();
+        this.isActive = true;
+    }
+
+    public Group(){
+        this.isActive = true;
     }
 
 }

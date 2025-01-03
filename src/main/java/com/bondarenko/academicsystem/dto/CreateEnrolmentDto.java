@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class GroupDto {
-
-    private Long id;
-    private String name;
+public class CreateEnrolmentDto {
+    private long studentGroupId;
+    private long courseId;
 }
