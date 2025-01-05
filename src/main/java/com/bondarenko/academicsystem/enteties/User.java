@@ -32,6 +32,12 @@ public class User{
         this.fullName = dto.getName();
         this.username = dto.getUsername();
 
+        if (dto.getPassword().isBlank()) {
+            this.password = username;
+        } else {
+            this.password = dto.getPassword();
+        }
+
         switch (dto.getRole()){
             case("admin"): {
                 this.role = Role.ADMIN;
@@ -48,12 +54,6 @@ public class User{
             default: {
                 throw new IllegalArgumentException("Unknown role");
             }
-        }
-
-        if (dto.getPassword() != null) {
-            this.password = dto.getPassword();
-        } else {
-            this.password = username;
         }
     }
 

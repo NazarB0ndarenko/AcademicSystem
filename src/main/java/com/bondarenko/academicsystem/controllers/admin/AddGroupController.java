@@ -25,10 +25,16 @@ public class AddGroupController {
     }
 
     @PostMapping("/admin/add-group")
-    public String addGroup(@ModelAttribute CreateGroupDto createGroupDto, RedirectAttributes redirectAttributes) {
+    public String addGroup(@ModelAttribute CreateGroupDto createGroupDto, RedirectAttributes redirectAttributes, Model model) {
+        if (groupService.groupNameExists(createGroupDto.getName())) {
+            model.addAttribute("error", "Group name already exists. Please choose another.");
+            model.addAttribute("students", studentService.findStudentsWithoutGroup());
+            return "AddGroup";
+        }
+
         groupService.saveGroup(createGroupDto);
         redirectAttributes.addFlashAttribute("message", "Group added successfully.");
         return "redirect:/admin/add-group";
     }
-
 }
+

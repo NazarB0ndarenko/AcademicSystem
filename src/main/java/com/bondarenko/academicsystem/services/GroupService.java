@@ -53,6 +53,10 @@ public class GroupService {
         log.info("Successfully deleted group with id: {}", groupId);
     }
 
+    public boolean groupNameExists(String name) {
+        return groupRepository.existsByName(name);
+    }
+
 
 }
 

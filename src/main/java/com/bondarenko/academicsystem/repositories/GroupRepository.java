@@ -24,4 +24,5 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
             "WHERE g.id = :id")
     void deactivateGroup(@Param("id") Long id);
 
+    boolean existsByName(String username);
 }

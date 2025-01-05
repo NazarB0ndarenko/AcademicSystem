@@ -1,6 +1,6 @@
 package com.bondarenko.academicsystem.controllers.admin;
 
-import com.bondarenko.academicsystem.dto.CreateEnrolmentDto;
+import com.bondarenko.academicsystem.dto.enrolment.CreateEnrolmentDto;
 import com.bondarenko.academicsystem.dto.cource.CourseDto;
 import com.bondarenko.academicsystem.dto.group.GroupDto;
 import com.bondarenko.academicsystem.services.CourseService;
@@ -31,7 +31,7 @@ public class AddEnrolmentController {
 
         model.addAttribute("groups", groups);
         model.addAttribute("courses", courses);
-        return "addEnrolment";
+        return "AddEnrolment";
     }
     
     @PostMapping

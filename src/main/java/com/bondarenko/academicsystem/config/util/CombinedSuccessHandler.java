@@ -27,7 +27,6 @@ public class CombinedSuccessHandler implements AuthenticationSuccessHandler {
         SecurityUser user = (SecurityUser) authentication.getPrincipal();
         log.info("User {} successfully authenticated", user.getUsername());
 
-        // Generate JWT and add as a cookie
         String jwtToken = jwtService.generateToken(user);
         Cookie jwtCookie = new Cookie("jwt-token", jwtToken);
         jwtCookie.setHttpOnly(true);
@@ -36,20 +35,19 @@ public class CombinedSuccessHandler implements AuthenticationSuccessHandler {
         jwtCookie.setMaxAge((int) jwtService.getExpirationTime() / 1000);
         response.addCookie(jwtCookie);
 
-        // Determine redirect URL based on role
         String redirectUrl = authentication.getAuthorities().stream()
                 .map(authority -> switch (authority.getAuthority()) {
                     case "ROLE_ADMIN" -> {
                         log.info("User {} logged in as admin", user.getUsername());
                         yield "/admin/dashboard";
                     }
-                    case "ROLE_LECTURER" -> {
-                        log.info("User {} logged in as lecturer", user.getUsername());
-                        yield "/lecturer/home";
+                    case "ROLE_LECTURE" -> {
+                        log.info("User {} logged in as lecture", user.getUsername());
+                        yield "/lecture/courses";
                     }
                     case "ROLE_STUDENT" -> {
                         log.info("User {} logged in as student", user.getUsername());
-                        yield "/student/home";
+                        yield "/student";
                     }
                     default -> null;
                 })

@@ -1,5 +1,6 @@
 package com.bondarenko.academicsystem.repositories;
 
+import com.bondarenko.academicsystem.dto.NameIdDto;
 import com.bondarenko.academicsystem.dto.StudentNameIdDto;
 import com.bondarenko.academicsystem.enteties.Group;
 import com.bondarenko.academicsystem.enteties.Student;
@@ -25,7 +26,7 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
     @Query("SELECT s.group.id " +
             "FROM Student s " +
             "WHERE s.id = :id")
-    public Optional<Long> getGroupId(@RequestParam Long id);
+    Optional<Long> getGroupId(@RequestParam Long id);
 
     @Modifying
     @Transactional
@@ -39,5 +40,10 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
 
     @Query("SELECT s.id FROM Student s WHERE s.group.id = :groupId")
     List<Long> findStudentIdsByGroupId(@Param("groupId") Long groupId);
+
+    @Query("SELECT new com.bondarenko.academicsystem.dto.NameIdDto(s.id, s.user.fullName) " +
+            "FROM Student s " +
+            "WHERE s.user.username = :username")
+    NameIdDto findNameIdByUsername(@Param("username") String username);
 
 }

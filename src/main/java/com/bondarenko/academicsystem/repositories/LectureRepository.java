@@ -24,4 +24,9 @@ public interface LectureRepository extends CrudRepository<Lecture, Long> {
     @Query("SELECT new com.bondarenko.academicsystem.dto.LectureNameIdDto(l.id, l.user.fullName) " +
             "FROM Lecture l")
     List<LectureNameIdDto> getAllLectureNameIdDto();
+
+    @Query("SELECT l.id " +
+            "FROM Lecture l " +
+            "WHERE l.user.username = :username")
+    long getLectureIdByUsername(@Param("username") String username);
 }

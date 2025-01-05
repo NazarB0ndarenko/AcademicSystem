@@ -23,7 +23,7 @@ public class Student {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @OneToMany
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Enrolment> enrolments;
 
     public Student(User user, long groupId) {

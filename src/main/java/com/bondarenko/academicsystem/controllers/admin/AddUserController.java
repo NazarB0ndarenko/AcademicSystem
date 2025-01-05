@@ -38,8 +38,16 @@ public class AddUserController {
     }
 
     @PostMapping("/add-user")
-    public String addUser(@Valid @ModelAttribute CreateUserDto createUserDto) {
+    public String addUser(@Valid @ModelAttribute CreateUserDto createUserDto, Model model) {
         User user = new User(createUserDto);
+
+        if (customUserDetailsService.userExists(createUserDto.getUsername())) {
+            model.addAttribute("error", "Username already exists. Please choose another.");
+            List<GroupDto> groups = groupService.getAllGroups();
+            model.addAttribute("groups", groups);
+            return "CreateUser";
+        }
+
         switch (user.getRole()) {
             case ADMIN: {
                 customUserDetailsService.createUser(user);
@@ -61,3 +69,4 @@ public class AddUserController {
         return "redirect:/admin/add-user";
     }
 }
+

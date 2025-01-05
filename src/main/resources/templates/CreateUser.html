@@ -112,6 +112,10 @@
 <div class="container">
     <h2>Create User</h2>
     <form id="user-form" method="POST" action="/admin/add-user">
+        <div class="error-message" style="color: red; margin-bottom: 20px;">
+            <p th:if="${error}" th:text="${error}"></p>
+        </div>
+
         <label for="role">Role</label>
         <select id="role" name="role" onchange="toggleFields()" required>
             <option value="" selected disabled>Select Role</option>
@@ -119,13 +123,17 @@
             <option value="student">Student</option>
             <option value="lecture">Lecture</option>
         </select>
+
         <label for="name">Full Name</label>
         <input type="text" id="name" name="name" required>
+
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
+
         <label for="password">Password</label>
         <input type="password" id="password" name="password">
         <div class="note">Leave blank to use the username as the password.</div>
+
         <div id="group-field" class="hidden">
             <label for="group">Group</label>
             <select id="group" name="group">
@@ -133,8 +141,10 @@
                 <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
             </select>
         </div>
+
         <button type="submit">Create User</button>
     </form>
+
     <div class="dashboard-button">
         <a href="/admin/dashboard">Go to Dashboard</a>
     </div>

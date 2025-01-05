@@ -69,4 +69,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info("Finding user role for username: {}", username);
         return userRepository.findUserIdByUsername(username);
     }
+
 }

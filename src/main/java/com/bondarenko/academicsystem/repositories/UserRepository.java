@@ -33,5 +33,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
             "FROM User u " +
             "WHERE u.username = :username")
     Optional<UserIdRoleDto> findUserIdByUsername(@Param("username") String username);
-
 }

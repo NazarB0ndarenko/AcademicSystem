@@ -6,6 +6,7 @@ import com.bondarenko.academicsystem.enteties.User;
 import com.bondarenko.academicsystem.repositories.LectureRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +17,12 @@ import java.util.List;
 public class LectureService {
 
     private final LectureRepository lectureRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Lecture addLecture(User user) {
         Lecture lecture = new Lecture(user);
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         log.info("Adding new lecture for user with username: {}", user.getUsername());
 
         lectureRepository.save(lecture);

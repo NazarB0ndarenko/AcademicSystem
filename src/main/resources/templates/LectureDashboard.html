@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Grades</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        .logout-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .logout-button a {
+            background-color: #007BFF;
+            padding: 14px 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .logout-button a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        .logout-button a:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Assign Grades</h2>
+    <form id="gradeForm" method="POST" action="/lecture/assign-grades">
+        <label for="course">Select Course</label>
+        <select id="course" name="courseId" required>
+            <option value="" disabled selected>Select a course</option>
+            <option th:each="course : ${courses}"
+                    th:value="${course.id}"
+                    th:text="${course.description}"></option>
+        </select>
+
+        <table id="enrolmentsTable">
+            <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Grade</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <button type="submit">Save Grades</button>
+    </form>
+
+    <div class="logout-button">
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const courseSelect = document.getElementById("course");
+        const enrolmentsTableBody = document.querySelector("#enrolmentsTable tbody");
+        const gradeForm = document.getElementById("gradeForm");
+
+        courseSelect.addEventListener("change", function () {
+            const courseId = this.value;
+
+            enrolmentsTableBody.innerHTML = "";
+
+            fetch(`/lecture/courses/${courseId}/enrolments`)
+                .then(response => response.json())
+                .then(enrolments => {
+                    enrolments.forEach(enrolment => {
+                        const row = document.createElement("tr");
+
+                        row.innerHTML = `
+                        <td>${enrolment.studentFullName}</td>
+                        <td>
+                            <input type="number" step="0.1" min="0" max="10"
+                                   data-student-id="${enrolment.studentId}"
+                                   value="${enrolment.grade || 0}" required>
+                        </td>
+                    `;
+
+                        enrolmentsTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error fetching enrolments:", error));
+        });
+
+        gradeForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const courseId = courseSelect.value;
+            const grades = {};
+
+            enrolmentsTableBody.querySelectorAll("input[data-student-id]").forEach(input => {
+                const studentId = input.getAttribute("data-student-id");
+                const grade = parseFloat(input.value);
+
+                if (!isNaN(grade)) {
+                    grades[studentId] = grade;
+                }
+            });
+
+            const payload = {
+                courseId: courseId,
+                grades: grades,
+            };
+
+            fetch(gradeForm.action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Grades saved successfully!");
+                    } else {
+                        alert("Error saving grades.");
+                    }
+                })
+                .catch(error => console.error("Error submitting grades:", error));
+        });
+    });
+</script>
+</body>
+</html>

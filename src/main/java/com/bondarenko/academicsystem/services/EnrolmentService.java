@@ -1,22 +1,25 @@
 package com.bondarenko.academicsystem.services;
 
-import com.bondarenko.academicsystem.dto.CreateEnrolmentDto;
+import com.bondarenko.academicsystem.dto.enrolment.CreateEnrolmentDto;
+import com.bondarenko.academicsystem.dto.enrolment.EnrolmentDto;
+import com.bondarenko.academicsystem.dto.enrolment.EnrolmentsInfoDto;
 import com.bondarenko.academicsystem.enteties.Course;
 import com.bondarenko.academicsystem.enteties.Enrolment;
-import com.bondarenko.academicsystem.enteties.Group;
 import com.bondarenko.academicsystem.enteties.Student;
 import com.bondarenko.academicsystem.repositories.EnrolmentRepository;
-import com.bondarenko.academicsystem.repositories.GroupRepository;
 import com.bondarenko.academicsystem.repositories.StudentRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Service
+@Transactional
 @AllArgsConstructor
 public class EnrolmentService {
 
@@ -41,5 +44,23 @@ public class EnrolmentService {
         log.info("Students enrolled to the course with id: {}", dto.getCourseId());
 
         return enrolments;
+    }
+
+    public List<EnrolmentDto> getEnrolmentsByCourseId(long courseId) {
+        log.info("Getting enrolments from course with id {}", courseId);
+
+        return enrolmentRepository.getEnrolmentByCourse_Id(courseId);
+    }
+
+    public void updateGrade(Long courseId, Long studentId, BigDecimal grade) {
+        log.info("Updating grade for student with id {} and course with id {}", studentId, courseId);
+
+        enrolmentRepository.updateGrade(courseId, studentId, grade);
+    }
+
+    public List<EnrolmentsInfoDto> getEnrolmentByStudentId(long studentId) {
+        log.info("Getting enrolments info from student with id {}", studentId);
+
+        return enrolmentRepository.getEnrolmentForStudent(studentId);
     }
 }

@@ -1,11 +1,13 @@
 package com.bondarenko.academicsystem.services;
 
+import com.bondarenko.academicsystem.dto.NameIdDto;
 import com.bondarenko.academicsystem.dto.StudentNameIdDto;
 import com.bondarenko.academicsystem.enteties.Student;
 import com.bondarenko.academicsystem.enteties.User;
 import com.bondarenko.academicsystem.repositories.StudentRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,9 +21,12 @@ import java.util.Optional;
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Student saveStudent(User user, long groupInput) {
         log.info("Creating student with username: {}", user.getUsername());
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Student student = new Student(user, groupInput);
         studentRepository.save(student);
@@ -55,6 +60,12 @@ public class StudentService {
         studentRepository.removeStudentFromGroup(studentId);
 
         log.info("Removing from group student with id: {}", studentId);
+    }
+
+    public NameIdDto findNameIdByUsername(String username){
+        log.info("Finding user role for username: {}", username);
+
+        return studentRepository.findNameIdByUsername(username);
     }
 
 }
