@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ class LectureServiceTest {
 
     @Mock
     private LectureRepository lectureRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private LectureService lectureService;
@@ -36,6 +40,8 @@ class LectureServiceTest {
 
         Lecture mockLecture = new Lecture(mockUser);
         when(lectureRepository.save(any(Lecture.class))).thenReturn(mockLecture);
+
+        when(passwordEncoder.encode(mockUser.getPassword())).thenReturn("encodedPassword");
 
         Lecture addedLecture = lectureService.addLecture(mockUser);
 

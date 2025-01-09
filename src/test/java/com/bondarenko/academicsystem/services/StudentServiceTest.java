@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,9 @@ class StudentServiceTest {
 
     @Mock
     private StudentRepository studentRepository;
+
+    @Mock
+    PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private StudentService studentService;
@@ -37,6 +41,8 @@ class StudentServiceTest {
         long groupInput = 1L;
         Student mockStudent = new Student(mockUser, groupInput);
         when(studentRepository.save(any(Student.class))).thenReturn(mockStudent);
+
+        when(passwordEncoder.encode(mockUser.getPassword())).thenReturn("encodedPassword");
 
         Student savedStudent = studentService.saveStudent(mockUser, groupInput);
 
